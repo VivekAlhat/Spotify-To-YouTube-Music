@@ -11,18 +11,20 @@ credentials = "oauth.json"
 
 
 if os.path.exists(credentials) == False:
-    colored(
-        "Missing YouTube music credentials. Please follow the steps mentioned in README file.",
-        "light_red",
+    print(
+        colored(
+            "Missing YouTube music credentials. Please follow the steps mentioned in README file.",
+            "light_red",
+        )
     )
-    exit(0)
+    exit(1)
 
 ytmusic = YTMusic(credentials)
 
 
 def create_playlist(playlist_name):
     """
-    This function created a new playlist on YouTube music
+    This function creates a new playlist on YouTube music
     """
     try:
         playlist_id = ytmusic.create_playlist(
@@ -37,6 +39,9 @@ def create_playlist(playlist_name):
 
 
 def add_to_playlist(playlists_directory, playlist_file):
+    """
+    This function takes the playlist file from the disk that contains list of tracks and adds it to the YouTube music playlist
+    """
     try:
         video_ids = []
         playlist_path = playlists_directory + playlist_file
